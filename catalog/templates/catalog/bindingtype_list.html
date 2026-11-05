@@ -1,0 +1,91 @@
+{% extends 'catalog/base_catalog.html' %}
+
+{% block title %}Types de Reliure - Catalogue{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="h3 fw-bold mb-1">Types de Reliure & Façonnage</h2>
+        <p class="text-muted mb-0">Gestion des modes de reliure, frais de calage machine, coût unitaire et limites de pagination.</p>
+    </div>
+    <a href="{% url 'catalog:bindingtype_create' %}" class="btn btn-primary shadow-sm">
+        <i class="bi bi-plus-lg me-1"></i>Nouvelle Reliure
+    </a>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light border-bottom">
+                    <tr>
+                        <th class="ps-4" style="width: 70px;">ID</th>
+                        <th>Code</th>
+                        <th>Nom de la Reliure</th>
+                        <th>Calage (Frais fixes)</th>
+                        <th>Coût unitaire</th>
+                        <th>Capacité (Pages)</th>
+                        <th class="text-end pe-4" style="width: 170px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for binding in bindings %}
+                    <tr>
+                        <td class="ps-4 text-muted fw-semibold">#{{ binding.id }}</td>
+                        <td>
+                            {% if binding.code == 'PUR' %}
+                                <span class="badge bg-primary text-uppercase">{{ binding.code }}</span>
+                            {% elif binding.code == 'WIRO' %}
+                                <span class="badge bg-info text-dark text-uppercase">{{ binding.code }}</span>
+                            {% elif binding.code == 'STITCH' %}
+                                <span class="badge bg-warning text-dark text-uppercase">{{ binding.code }}</span>
+                            {% else %}
+                                <span class="badge bg-secondary text-uppercase">{{ binding.code }}</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <strong class="text-dark">{{ binding.name }}</strong>
+                        </td>
+                        <td>
+                            <span class="text-secondary fw-semibold">{{ binding.base_setup_cost }} €</span>
+                            <small class="text-muted d-block" style="font-size: 0.75rem;">par tirage</small>
+                        </td>
+                        <td>
+                            <span class="text-success fw-semibold">{{ binding.unit_cost }} €</span>
+                            <small class="text-muted d-block" style="font-size: 0.75rem;">par exemplaire</small>
+                        </td>
+                        <td>
+                            <span class="badge bg-light text-dark border">
+                                <i class="bi bi-book me-1 text-muted"></i>{{ binding.min_pages }} à {{ binding.max_pages }} p.
+                            </span>
+                        </td>
+                        <td class="text-end pe-4">
+                            <div class="btn-group btn-group-sm">
+                                <a href="{% url 'catalog:bindingtype_update' binding.pk %}" class="btn btn-outline-primary" title="Modifier">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="{% url 'catalog:bindingtype_delete' binding.pk %}" class="btn btn-outline-danger" title="Supprimer">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center py-5 text-muted">
+                            <i class="bi bi-journal-x fs-2 d-block mb-2 text-secondary"></i>
+                            Aucun mode de reliure configuré.
+                            <div class="mt-2">
+                                <a href="{% url 'catalog:bindingtype_create' %}" class="btn btn-sm btn-outline-primary">
+                                    Ajouter une reliure
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

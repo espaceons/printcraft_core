@@ -1,0 +1,80 @@
+{% extends 'catalog/base_catalog.html' %}
+
+{% block title %}Types de Papier - Catalogue{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="h3 fw-bold mb-1">Types de Papier</h2>
+        <p class="text-muted mb-0">Configuration des gammes de papiers et de leur coefficient de main (épaisseur).</p>
+    </div>
+    <a href="{% url 'catalog:papertype_create' %}" class="btn btn-primary shadow-sm">
+        <i class="bi bi-plus-lg me-1"></i>Nouveau Type
+    </a>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light border-bottom">
+                    <tr>
+                        <th class="ps-4" style="width: 80px;">ID</th>
+                        <th>Nom du Papier</th>
+                        <th>Main (Bulk Factor)</th>
+                        <th>Grammages associés</th>
+                        <th class="text-end pe-4" style="width: 180px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for paper in paper_types %}
+                    <tr>
+                        <td class="ps-4 text-muted fw-semibold">#{{ paper.id }}</td>
+                        <td>
+                            <span class="fw-semibold text-dark">{{ paper.name }}</span>
+                        </td>
+                        <td>
+                            <span class="badge bg-light text-dark border">
+                                {{ paper.bulk_factor }}
+                            </span>
+                            <small class="text-muted ms-1">
+                                {% if paper.bulk_factor > 1.2 %}
+                                    (Papier volumateur / bouffant)
+                                {% else %}
+                                    (Papier dense / couché)
+                                {% endif %}
+                            </small>
+                        </td>
+                        <td>
+                            <span class="badge bg-secondary-subtle text-secondary-emphasis rounded-pill">
+                                {{ paper.weights.count }} déclinaison(s)
+                            </span>
+                        </td>
+                        <td class="text-end pe-4">
+                            <div class="btn-group btn-group-sm">
+                                <a href="{% url 'catalog:papertype_update' paper.pk %}" class="btn btn-outline-primary" title="Modifier">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="{% url 'catalog:papertype_delete' paper.pk %}" class="btn btn-outline-danger" title="Supprimer">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center py-5 text-muted">
+                            <i class="bi bi-inbox fs-2 d-block mb-2 text-secondary"></i>
+                            Aucun type de papier enregistré.
+                            <div class="mt-2">
+                                <a href="{% url 'catalog:papertype_create' %}" class="btn btn-sm btn-outline-primary">Ajouter un papier</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'catalog/base_catalog.html' %}
+
+{% block title %}Grammages et Coûts - Catalogue{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="h3 fw-bold mb-1">Grammages & Tarification</h2>
+        <p class="text-muted mb-0">Paramétrage des coûts de matière par feuille A4 et impact sur la tranche du livre.</p>
+    </div>
+    <a href="{% url 'catalog:paperweight_create' %}" class="btn btn-primary shadow-sm">
+        <i class="bi bi-plus-lg me-1"></i>Nouveau Grammage
+    </a>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light border-bottom">
+                    <tr>
+                        <th class="ps-4" style="width: 80px;">ID</th>
+                        <th>Type de Papier</th>
+                        <th>Grammage</th>
+                        <th>Épaisseur / Feuille</th>
+                        <th>Coût brut / Feuille A4</th>
+                        <th class="text-end pe-4" style="width: 180px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for weight in paper_weights %}
+                    <tr>
+                        <td class="ps-4 text-muted fw-semibold">#{{ weight.id }}</td>
+                        <td>
+                            <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1">
+                                {{ weight.paper_type.name }}
+                            </span>
+                        </td>
+                        <td>
+                            <strong class="text-dark">{{ weight.grammage }}</strong> <small class="text-muted">g/m²</small>
+                        </td>
+                        <td>
+                            <code>{{ weight.thickness_per_sheet_mm|floatformat:3 }} mm</code>
+                        </td>
+                        <td>
+                            <span class="fw-semibold text-success">
+                                {{ weight.cost_per_sheet_a4 }} €
+                            </span>
+                        </td>
+                        <td class="text-end pe-4">
+                            <div class="btn-group btn-group-sm">
+                                <a href="{% url 'catalog:paperweight_update' weight.pk %}" class="btn btn-outline-primary" title="Modifier">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+                                <a href="{% url 'catalog:paperweight_delete' weight.pk %}" class="btn btn-outline-danger" title="Supprimer">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center py-5 text-muted">
+                            <i class="bi bi-file-earmark-spreadsheet fs-2 d-block mb-2 text-secondary"></i>
+                            Aucun grammage défini.
+                            <div class="mt-2">
+                                <a href="{% url 'catalog:paperweight_create' %}" class="btn btn-sm btn-outline-primary">Ajouter un grammage</a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

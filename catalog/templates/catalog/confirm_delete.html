@@ -1,0 +1,15 @@
+{% comment %} Confirmation de suppression {% endcomment %}
+
+<div class="container mt-5" style="max-width: 500px;">
+    <div class="card border-danger shadow-sm">
+        <div class="card-body text-center p-4">
+            <h4 class="card-title text-danger">Confirmer la suppression</h4>
+            <p class="card-text mt-3">Êtes-vous sûr de vouloir supprimer définitivement cet élément ?</p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger px-4">Oui, supprimer</button>
+                <a href="javascript:history.back()" class="btn btn-secondary px-4 ms-2">Annuler</a>
+            </form>
+        </div>
+    </div>
+</div>

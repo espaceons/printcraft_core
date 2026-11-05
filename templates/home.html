@@ -1,0 +1,302 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}PrintCraft | Atelier d'impression de livres & papeterie sur mesure{% endblock %}
+
+{% block content %}
+<!-- ==========================================
+     1. HERO SECTION
+=========================================== -->
+<section class="py-5 bg-white border-bottom position-relative overflow-hidden">
+    <div class="container py-lg-5">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-7 text-center text-lg-start">
+                <div class="d-inline-flex align-items-center gap-2 px-3 py-1 mb-3 rounded-pill bg-primary-subtle text-primary border border-primary-subtle small fw-semibold">
+                    <i class="bi bi-patch-check-fill"></i> Spécialiste tirages courts dès 10 exemplaires
+                </div>
+                <h1 class="display-4 fw-extrabold text-dark mb-3 lh-sm">
+                    Donnez vie à vos livres & imprimés <span class="text-primary">sur mesure</span>
+                </h1>
+                <p class="lead text-secondary mb-4 col-xl-11">
+                    Calculez votre devis en direct, personnalisez vos reliures et grammages de papier, et confiez vos fichiers à un atelier qui contrôle chaque page avant tirage.
+                </p>
+                <div class="d-flex flex-column flex-sm-row justify-content-center justify-content-lg-start gap-3 mb-4">
+                    <a href="#products" class="btn btn-brand btn-lg shadow-sm">
+                        <i class="bi bi-calculator me-2"></i>Configurer mon projet
+                    </a>
+                    <a href="#process" class="btn btn-outline-secondary btn-lg">
+                        <i class="bi bi-play-circle me-2"></i>Notre méthode d'impression
+                    </a>
+                </div>
+                <div class="row pt-3 text-start g-3 border-top">
+                    <div class="col-sm-4">
+                        <div class="fw-bold text-dark fs-5 mb-0">100% Vérifié</div>
+                        <small class="text-muted">Contrôle prépresse 300 DPI</small>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="fw-bold text-dark fs-5 mb-0">48-72h</div>
+                        <small class="text-muted">Délai d'expédition moyen</small>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="fw-bold text-dark fs-5 mb-0">4.9 / 5</div>
+                        <small class="text-muted">Noté par les éditeurs & pros</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="card border-0 shadow-lg rounded-4 overflow-hidden bg-dark text-white p-4 position-relative">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="badge bg-warning text-dark px-3 py-2 fw-semibold">Simulation Express</span>
+                        <i class="bi bi-printer fs-4 text-secondary"></i>
+                    </div>
+                    <h4 class="fw-bold mb-2">Besoin d'un tirage livre ?</h4>
+                    <p class="text-secondary small mb-4">Exemple standard pour auto-édition ou corporate :</p>
+                    <ul class="list-unstyled small text-light d-flex flex-column gap-2 mb-4">
+                        <li><i class="bi bi-check2 text-primary me-2"></i><strong>Format :</strong> A5 (148 x 210 mm)</li>
+                        <li><i class="bi bi-check2 text-primary me-2"></i><strong>Pages :</strong> 120 pages intérieur N&B</li>
+                        <li><i class="bi bi-check2 text-primary me-2"></i><strong>Papier :</strong> Bouffant Ivoire 80g (main 1.8)</li>
+                        <li><i class="bi bi-check2 text-primary me-2"></i><strong>Reliure :</strong> Dos Carré Collé PUR</li>
+                        <li><i class="bi bi-check2 text-primary me-2"></i><strong>Volume :</strong> 50 exemplaires</li>
+                    </ul>
+                    <div class="p-3 bg-secondary bg-opacity-25 rounded-3 mb-3 d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="text-secondary small d-block">Estimation indicative</span>
+                            <span class="fs-4 fw-bold text-white">~ 3,70 DTN <small class="fs-6 text-secondary fw-normal">HT / unité</small></span>
+                        </div>
+                        <span class="badge bg-success-subtle text-success border border-success-subtle">-10% volume</span>
+                    </div>
+                    <a href="#simulator" class="btn btn-primary w-100 fw-semibold">
+                        Personnaliser cette formule
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================
+     2. GRILLE DES PRODUITS
+=========================================== -->
+<section id="products" class="py-5">
+    <div class="container py-4">
+        <div class="text-center mb-5">
+            <h2 class="h1 fw-bold text-dark">Nos Supports d'Impression</h2>
+            <p class="text-muted col-lg-6 mx-auto">
+                Choisissez le support adapté à votre projet. Nos moteurs calculent le coût exact selon vos options techniques.
+            </p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Produit 1 : Livres & Romans -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm rounded-4 hover-shadow transition">
+                    <div class="card-body p-4 d-flex flex-column">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-primary-subtle text-primary rounded-3 p-3 mb-3" style="width: 54px; height: 54px;">
+                            <i class="bi bi-book-half fs-4"></i>
+                        </div>
+                        <span class="badge bg-primary text-white w-fit-content mb-2" style="width: fit-content;">Dès 10 exemplaires</span>
+                        <h4 class="card-title fw-bold text-dark mb-2">Livres & Romans</h4>
+                        <p class="card-text text-secondary small flex-grow-1">
+                            Romans, mémoires, essais et thèses. Papier bouffant texturé ou blanc standard, dos carré collé avec calcul automatique de tranche.
+                        </p>
+                        <hr class="my-3">
+                        <ul class="list-unstyled small text-muted mb-4 d-flex flex-column gap-1">
+                            <li><i class="bi bi-dot text-primary fs-5 align-middle"></i>Dos carré collé ou reliure spirale</li>
+                            <li><i class="bi bi-dot text-primary fs-5 align-middle"></i>Pelliculage mat, brillant ou soft-touch</li>
+                            <li><i class="bi bi-dot text-primary fs-5 align-middle"></i>Format Roman (A5), Royal ou Poche</li>
+                        </ul>
+                        <a href="#simulator" class="btn btn-outline-primary fw-semibold mt-auto">
+                            Configurer un livre <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produit 2 : Tirages feuilles A3 / A4 / A5 -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm rounded-4 hover-shadow transition">
+                    <div class="card-body p-4 d-flex flex-column">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-info-subtle text-info-emphasis rounded-3 p-3 mb-3" style="width: 54px; height: 54px;">
+                            <i class="bi bi-file-earmark-text fs-4"></i>
+                        </div>
+                        <span class="badge bg-secondary-subtle text-dark w-fit-content mb-2" style="width: fit-content;">Formats standards</span>
+                        <h4 class="card-title fw-bold text-dark mb-2">Affiches, Flyers & Feuilles</h4>
+                        <p class="card-text text-secondary small flex-grow-1">
+                            Plaquettes commerciales, menus, affiches événementielles A3 ou tracts A5. Grammages du 80g standard au 350g couché rigide.
+                        </p>
+                        <hr class="my-3">
+                        <ul class="list-unstyled small text-muted mb-4 d-flex flex-column gap-1">
+                            <li><i class="bi bi-dot text-info fs-5 align-middle"></i>Formats A3, A4 ou A5 au choix</li>
+                            <li><i class="bi bi-dot text-info fs-5 align-middle"></i>Impression 1 face (recto) ou 2 faces</li>
+                            <li><i class="bi bi-dot text-info fs-5 align-middle"></i>Finition brillante ou satinée</li>
+                        </ul>
+                        <a href="#simulator" class="btn btn-outline-primary fw-semibold mt-auto">
+                            Configurer une feuille <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produit 3 : Enveloppes d'affaires -->
+            <div class="col-md-6 col-lg-4">
+                <div class="card h-100 border-0 shadow-sm rounded-4 hover-shadow transition">
+                    <div class="card-body p-4 d-flex flex-column">
+                        <div class="d-inline-flex align-items-center justify-content-center bg-warning-subtle text-warning-emphasis rounded-3 p-3 mb-3" style="width: 54px; height: 54px;">
+                            <i class="bi bi-envelope-paper fs-4"></i>
+                        </div>
+                        <span class="badge bg-secondary-subtle text-dark w-fit-content mb-2" style="width: fit-content;">Correspondance Pro</span>
+                        <h4 class="card-title fw-bold text-dark mb-2">Enveloppes Personnalisées</h4>
+                        <p class="card-text text-secondary small flex-grow-1">
+                            Renforcez l'identité de votre entreprise avec des enveloppes imprimées à vos couleurs, avec ou sans fenêtre pour publipostage.
+                        </p>
+                        <hr class="my-3">
+                        <ul class="list-unstyled small text-muted mb-4 d-flex flex-column gap-1">
+                            <li><i class="bi bi-dot text-warning fs-5 align-middle"></i>Formats DL (110x220mm), C5 ou C4</li>
+                            <li><i class="bi bi-dot text-warning fs-5 align-middle"></i>Avec ou sans fenêtre transparente</li>
+                            <li><i class="bi bi-dot text-warning fs-5 align-middle"></i>Fermeture autocollante avec bande protectrice</li>
+                        </ul>
+                        <a href="#simulator" class="btn btn-outline-primary fw-semibold mt-auto">
+                            Configurer des enveloppes <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================
+     3. COMMENT ÇA MARCHE (PROCESS)
+=========================================== -->
+<section id="process" class="py-5 bg-white border-top border-bottom">
+    <div class="container py-4">
+        <div class="text-center mb-5">
+            <h2 class="h1 fw-bold text-dark">Une Commande en 4 Étapes Simples</h2>
+            <p class="text-muted col-lg-6 mx-auto">De la sélection de vos options jusqu'à la livraison finale.</p>
+        </div>
+
+        <div class="row g-4 text-center">
+            <div class="col-md-3">
+                <div class="p-3">
+                    <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" style="width: 60px; height: 60px; font-size: 1.5rem; font-weight: 700;">1</div>
+                    <h5 class="fw-bold">Configuration</h5>
+                    <p class="text-secondary small">Choisissez vos options : pagination, papier, type de reliure et volume.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3">
+                    <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" style="width: 60px; height: 60px; font-size: 1.5rem; font-weight: 700;">2</div>
+                    <h5 class="fw-bold">Devis en Direct</h5>
+                    <p class="text-secondary small">Visualisez instantanément le prix HT, TTC et l'épaisseur calculée de votre dos.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3">
+                    <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" style="width: 60px; height: 60px; font-size: 1.5rem; font-weight: 700;">3</div>
+                    <h5 class="fw-bold">Upload & Prépresse</h5>
+                    <p class="text-secondary small">Déposez votre PDF : notre outil contrôle automatiquement les pages et le format.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="p-3">
+                    <div class="rounded-circle bg-primary text-white d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" style="width: 60px; height: 60px; font-size: 1.5rem; font-weight: 700;">4</div>
+                    <h5 class="fw-bold">Tirage & Envoi</h5>
+                    <p class="text-secondary small">Impression haute fidélité en atelier et expédition soignée avec suivi transporteur.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================
+     4. TÉMOIGNAGES CLIENTS
+=========================================== -->
+<section class="py-5 bg-light">
+    <div class="container py-4">
+        <div class="text-center mb-5">
+            <h2 class="h1 fw-bold text-dark">Ce que disent nos clients</h2>
+            <p class="text-muted col-lg-6 mx-auto">Auteurs indépendants, agences et entreprises nous confient leurs projets.</p>
+        </div>
+
+        <div class="row g-4">
+            <!-- Avis 1 -->
+            <div class="col-lg-4">
+                <div class="card h-100 border-0 shadow-sm rounded-4 p-4">
+                    <div class="text-warning mb-3">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="text-secondary small fst-italic mb-4 flex-grow-1">
+                        "Pour mon premier roman en auto-édition (tirage de 80 exemplaires), le rendu du papier bouffant 80g et le dos collé sont irréprochables. La tranche calculée au millimètre près !"
+                    </p>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="bg-primary-subtle text-primary rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 44px; height: 44px;">
+                            MC
+                        </div>
+                        <div>
+                            <div class="fw-bold text-dark">Marc C.</div>
+                            <small class="text-muted">Auteur indépendant</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avis 2 -->
+            <div class="col-lg-4">
+                <div class="card h-100 border-0 shadow-sm rounded-4 p-4">
+                    <div class="text-warning mb-3">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="text-secondary small fst-italic mb-4 flex-grow-1">
+                        "Nous avions besoin de 200 plaquettes A4 en 300g couché satiné pour un salon professionnel. Commande passée le lundi, reçue parfaitement emballée le jeudi."
+                    </p>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="bg-success-subtle text-success rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 44px; height: 44px;">
+                            SL
+                        </div>
+                        <div>
+                            <div class="fw-bold text-dark">Sophie L.</div>
+                            <small class="text-muted">Responsable Communication</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avis 3 -->
+            <div class="col-lg-4">
+                <div class="card h-100 border-0 shadow-sm rounded-4 p-4">
+                    <div class="text-warning mb-3">
+                        <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                    </div>
+                    <p class="text-secondary small fst-italic mb-4 flex-grow-1">
+                        "Le configurateur en ligne fait gagner un temps précieux : voir le prix évoluer en direct dès qu'on change de grammage ou de reliure évite les allers-retours de devis par mail."
+                    </p>
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="bg-info-subtle text-info-emphasis rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 44px; height: 44px;">
+                            AD
+                        </div>
+                        <div>
+                            <div class="fw-bold text-dark">Alexandre D.</div>
+                            <small class="text-muted">Studio Graphique</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================
+     5. BANNIÈRE APPEL À L'ACTION (CTA)
+=========================================== -->
+<section class="py-5 bg-dark text-white text-center">
+    <div class="container py-3">
+        <h2 class="display-6 fw-bold mb-3">Prêt à démarrer votre tirage ?</h2>
+        <p class="lead text-secondary mb-4 col-lg-8 mx-auto">
+            Testez différentes options techniques sans engagement. Votre devis est calculé en quelques secondes.
+        </p>
+        <a href="#simulator" class="btn btn-brand btn-lg shadow-sm">
+            <i class="bi bi-calculator me-2"></i>Lancer mon devis en ligne
+        </a>
+    </div>
+</section>
+{% endblock %}
