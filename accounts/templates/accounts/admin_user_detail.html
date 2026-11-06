@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}Client : {{ target_user.username }} | MyPrint Admin{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <a href="{% url 'accounts:admin_user_list' %}" class="btn btn-outline-secondary btn-sm">
+            <i class="bi bi-arrow-left me-1"></i>Retour à la liste des utilisateurs
+        </a>
+        <div class="d-flex gap-2">
+            <a href="{% url 'accounts:admin_user_edit' target_user.id %}" class="btn btn-sm btn-primary">
+                <i class="bi bi-pencil me-1"></i>Modifier ce compte
+            </a>
+            {% if target_user != request.user %}
+            <a href="{% url 'accounts:admin_user_toggle' target_user.id %}" class="btn btn-sm {% if target_user.is_active %}btn-outline-warning{% else %}btn-outline-success{% endif %}">
+                <i class="bi {% if target_user.is_active %}bi-lock{% else %}bi-unlock{% endif %} me-1"></i>
+                {% if target_user.is_active %}Bloquer{% else %}Activer{% endif %}
+            </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Informations générales du client -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-0 rounded-4 mb-4">
+                <div class="card-body p-4">
+                    <div class="text-center mb-3">
+                        <div class="rounded-circle bg-primary-subtle text-primary d-inline-flex align-items-center justify-content-center fw-bold fs-3 mb-2" style="width: 70px; height: 70px;">
+                            {{ target_user.first_name|first|default:target_user.username|first|upper }}
+                        </div>
+                        <h5 class="fw-bold mb-0">{{ target_user.get_full_name|default:target_user.username }}</h5>
+                        <small class="text-muted">@{{ target_user.username }}</small>
+                        <div class="mt-2 d-flex justify-content-center gap-1">
+                            <span class="badge bg-secondary-subtle text-dark border">
+                                {{ target_user.profile.get_client_type_display|default:"Particulier" }}
+                            </span>
+                            {% if target_user.is_staff %}
+                                <span class="badge bg-info-subtle text-info-emphasis border">Staff Atelier</span>
+                            {% endif %}
+                            {% if not target_user.is_active %}
+                                <span class="badge bg-danger-subtle text-danger border">Bloqué</span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <h6 class="fw-bold small text-uppercase text-secondary mb-3">Coordonnées</h6>
+                    <ul class="list-unstyled small d-flex flex-column gap-2 mb-0">
+                        <li><strong>Email :</strong> <a href="mailto:{{ target_user.email }}" class="text-decoration-none">{{ target_user.email|default:"Non renseigné" }}</a></li>
+                        <li><strong>Téléphone :</strong> {{ target_user.profile.phone|default:"Non renseigné" }}</li>
+                        <li><strong>Entreprise :</strong> {{ target_user.profile.company_name|default:"-" }}</li>
+                        <li><strong>N° TVA :</strong> {{ target_user.profile.vat_number|default:"-" }}</li>
+                        <li><strong>Adresse :</strong> {{ target_user.profile.address|default:"Non renseignée" }}</li>
+                        <li><strong>Date d'inscription :</strong> {{ target_user.date_joined|date:"d/m/Y H:i" }}</li>
+                        <li><strong>Dernière connexion :</strong> {{ target_user.last_login|date:"d/m/Y H:i"|default:"Jamais" }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Commandes & Tirages du client -->
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+                    <h5 class="fw-bold mb-0">
+                        <i class="bi bi-journal-text me-2 text-primary"></i>Commandes & Tirages réalisés
+                    </h5>
+                    <span class="badge bg-light text-dark border">{{ orders|length }} commande(s)</span>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="ps-3">N°</th>
+                                    <th>Produit</th>
+                                    <th>Quantité</th>
+                                    <th>Total TTC</th>
+                                    <th>Statut</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in orders %}
+                                <tr>
+                                    <td class="ps-3 fw-bold">#{{ order.id }}</td>
+                                    <td>
+                                        <div class="fw-semibold">{{ order.get_product_type_display }}</div>
+                                        {% if order.detected_pages %}
+                                            <small class="text-muted">{{ order.detected_pages }} pages</small>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ order.quantity }} ex.</td>
+                                    <td class="fw-bold text-success">{{ order.total_ttc }} €</td>
+                                    <td>
+                                        <span class="badge bg-info-subtle text-info-emphasis border">
+                                            {{ order.get_status_display }}
+                                        </span>
+                                    </td>
+                                    <td class="small text-muted">{{ order.created_at|date:"d/m/Y" }}</td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="6" class="text-center py-5 text-muted">
+                                        <i class="bi bi-box2 fs-2 d-block mb-2 text-secondary"></i>
+                                        Aucune commande passée par ce compte.
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

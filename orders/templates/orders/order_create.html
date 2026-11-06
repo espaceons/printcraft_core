@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block title %}Nouveau Tirage | MyPrint{% endblock %}
+
+{% block content %}
+<div class="container py-5" style="max-width: 860px;">
+    <div class="card shadow-sm border-0 rounded-4 overflow-hidden">
+        <div class="card-header bg-white py-3 px-4 border-bottom d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="fw-bold mb-1 text-dark">
+                    <i class="bi bi-printer me-2 text-primary"></i>Lancer un Nouveau Tirage
+                </h4>
+                <p class="text-muted small mb-0">Configurez les paramètres techniques et déposez votre fichier d'impression.</p>
+            </div>
+            <span class="badge bg-primary-subtle text-primary border border-primary-subtle px-3 py-2 rounded-pill">
+                Contrôle prépresse inclus
+            </span>
+        </div>
+
+        <div class="card-body p-4 p-md-5">
+            <form method="post" enctype="multipart/form-data" id="orderCreateForm">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger py-2 small shadow-sm mb-4">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <!-- Section 1 : Format & Type de document -->
+                <h6 class="text-uppercase text-secondary fw-bold small mb-3 tracking-wide">
+                    <i class="bi bi-sliders me-1"></i> 1. Format & Produit
+                </h6>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold small text-dark">{{ form.product_type.label }}</label>
+                        {{ form.product_type }}
+                        {% if form.product_type.errors %}
+                            <div class="text-danger small mt-1">{{ form.product_type.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold small text-dark">{{ form.page_format.label }}</label>
+                        {{ form.page_format }}
+                        {% if form.page_format.errors %}
+                            <div class="text-danger small mt-1">{{ form.page_format.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Section 2 : Papier, Finition & Reliure -->
+                <h6 class="text-uppercase text-secondary fw-bold small mb-3 tracking-wide">
+                    <i class="bi bi-journal-bookmark me-1"></i> 2. Papier & Façonnage
+                </h6>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold small text-dark">{{ form.paper_choice.label }}</label>
+                        {{ form.paper_choice }}
+                        <div class="form-text small">Texture et tenue du feuillet intérieur.</div>
+                        {% if form.paper_choice.errors %}
+                            <div class="text-danger small mt-1">{{ form.paper_choice.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold small text-dark">{{ form.binding_choice.label }}</label>
+                        {{ form.binding_choice }}
+                        <div class="form-text small">PUR collé pour romans, agrafes pour brochures fines.</div>
+                        {% if form.binding_choice.errors %}
+                            <div class="text-danger small mt-1">{{ form.binding_choice.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold small text-dark">{{ form.print_color.label }}</label>
+                        {{ form.print_color }}
+                        {% if form.print_color.errors %}
+                            <div class="text-danger small mt-1">{{ form.print_color.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold small text-dark">{{ form.quantity.label }}</label>
+                        {{ form.quantity }}
+                        <div class="form-text small">Remise sur volume appliquée dès 50 et 100 ex.</div>
+                        {% if form.quantity.errors %}
+                            <div class="text-danger small mt-1">{{ form.quantity.errors.0 }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Section 3 : Fichier Prépresse (PDF) -->
+                <h6 class="text-uppercase text-secondary fw-bold small mb-3 tracking-wide">
+                    <i class="bi bi-file-earmark-pdf me-1"></i> 3. Document Source
+                </h6>
+                <div class="p-3 bg-light rounded-3 border mb-4">
+                    <label class="form-label fw-semibold small text-dark mb-1">{{ form.pdf_file.label }}</label>
+                    {{ form.pdf_file }}
+                    {% if form.pdf_file.errors %}
+                        <div class="text-danger small mt-1">{{ form.pdf_file.errors.0 }}</div>
+                    {% endif %}
+                    <div class="d-flex align-items-center gap-2 mt-2 text-muted small">
+                        <i class="bi bi-info-circle text-primary"></i>
+                        <span>Notre moteur analysera automatiquement le nombre de pages et vérifiera les dimensions de coupe.</span>
+                    </div>
+                </div>
+
+                <!-- Boutons d'action -->
+                <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+                    <a href="{% url 'accounts:dashboard' %}" class="btn btn-outline-secondary px-4">
+                        <i class="bi bi-arrow-left me-1"></i>Retour
+                    </a>
+                    <button type="submit" class="btn btn-brand px-4 py-2">
+                        <i class="bi bi-check-circle me-1"></i>Valider et Lancer le Tirage
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

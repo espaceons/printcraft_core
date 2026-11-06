@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block title %}Modifier {{ target_user.username }} | MyPrint Admin{% endblock %}
+
+{% block content %}
+<div class="container py-5" style="max-width: 820px;">
+    <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-header bg-white py-3 px-4 border-bottom d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="fw-bold mb-1 text-dark">
+                    <i class="bi bi-person-gear me-2 text-primary"></i>Modifier l'utilisateur : {{ target_user.username }}
+                </h4>
+                <p class="text-muted small mb-0">Mettez à jour les permissions atelier et les informations de contact.</p>
+            </div>
+            <a href="{% url 'accounts:admin_user_detail' target_user.id %}" class="btn btn-sm btn-outline-secondary">
+                Annuler
+            </a>
+        </div>
+
+        <div class="card-body p-4 p-md-5">
+            <form method="post">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger py-2 small shadow-sm mb-4">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <!-- Section Identité & Droits -->
+                <h6 class="text-uppercase text-secondary fw-bold small mb-3 tracking-wide">
+                    <i class="bi bi-person-badge me-1"></i> Identité & Rôles
+                </h6>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold">{{ form.first_name.label }}</label>
+                        {{ form.first_name }}
+                        {% if form.first_name.errors %}<div class="text-danger small mt-1">{{ form.first_name.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold">{{ form.last_name.label }}</label>
+                        {{ form.last_name }}
+                        {% if form.last_name.errors %}<div class="text-danger small mt-1">{{ form.last_name.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label small fw-semibold">{{ form.email.label }}</label>
+                        {{ form.email }}
+                        {% if form.email.errors %}<div class="text-danger small mt-1">{{ form.email.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check form-switch mt-2">
+                            {{ form.is_active }}
+                            <label class="form-check-label fw-semibold small" for="{{ form.is_active.id_for_label }}">
+                                {{ form.is_active.label }}
+                            </label>
+                            <div class="form-text small">Décocher pour bloquer l'accès à ce compte.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check form-switch mt-2">
+                            {{ form.is_staff }}
+                            <label class="form-check-label fw-semibold small" for="{{ form.is_staff.id_for_label }}">
+                                {{ form.is_staff.label }}
+                            </label>
+                            <div class="form-text small">Permet d'accéder au catalogue technique et aux outils atelier.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section Profil Client & Entreprise -->
+                <h6 class="text-uppercase text-secondary fw-bold small mb-3 tracking-wide">
+                    <i class="bi bi-building me-1"></i> Coordonnées & Facturation
+                </h6>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold">{{ form.client_type.label }}</label>
+                        {{ form.client_type }}
+                        {% if form.client_type.errors %}<div class="text-danger small mt-1">{{ form.client_type.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold">{{ form.company_name.label }}</label>
+                        {{ form.company_name }}
+                        {% if form.company_name.errors %}<div class="text-danger small mt-1">{{ form.company_name.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold">{{ form.phone.label }}</label>
+                        {{ form.phone }}
+                        {% if form.phone.errors %}<div class="text-danger small mt-1">{{ form.phone.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label small fw-semibold">{{ form.vat_number.label }}</label>
+                        {{ form.vat_number }}
+                        {% if form.vat_number.errors %}<div class="text-danger small mt-1">{{ form.vat_number.errors.0 }}</div>{% endif %}
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label small fw-semibold">{{ form.address.label }}</label>
+                        {{ form.address }}
+                        {% if form.address.errors %}<div class="text-danger small mt-1">{{ form.address.errors.0 }}</div>{% endif %}
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+                    <a href="{% url 'accounts:admin_user_list' %}" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left me-1"></i>Retour liste
+                    </a>
+                    <button type="submit" class="btn btn-brand px-4 py-2">
+                        <i class="bi bi-check-circle me-1"></i>Enregistrer les modifications
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     
     # Applications internes
+    'accounts',
     'catalog',
     'pricing',
     'orders',
@@ -60,6 +61,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'printcraft_core.urls'
+
+
+LOGIN_URL = 'accounts:login'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
 
 TEMPLATES = [
     {
